@@ -30,7 +30,7 @@ export default function CartSheet() {
           shape="circle"
           isInvisible={cartProducts?.length === 0}
         >
-          <ShoppingBag className="text-zinc-500 h-8 w-8 lg:h-10 lg:w-10 stroke-1 transtion-all duration-150 ease-linear hover:text-blue-500 cursor-pointer" />
+          <ShoppingBag className="text-zinc-500 h-6 w-6 lg:h-10 lg:w-10 stroke-1 transtion-all duration-150 ease-linear hover:text-blue-500 cursor-pointer" />
         </Badge>
       </SheetTrigger>
       <SheetContent>
