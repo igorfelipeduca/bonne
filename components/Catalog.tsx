@@ -6,30 +6,25 @@ import ProductBox, { Product } from "./ProductBox";
 import { productsMock } from "@/lib/products.mock";
 import { useState } from "react";
 import { Search } from "lucide-react";
+import CatalogFilters from "./CatalogFilters";
 
-export default function ProductShowcase() {
+export default function Catalog() {
   const [query, setQuery] = useState<string>("");
-  const [searchClicked, setSearchClicked] = useState<boolean>(false);
 
   return (
-    <div className={`bg-black p-16 w-full`}>
+    <div className={`bg-black p-16 w-full min-h-screen`}>
       <div className="flex justify-center items-center gap-x-4 w-full">
         <Image src={"/icon.svg"} alt="Icon" className="h-10 w-10" isBlurred />
 
         <div className="w-2/3 border border-zinc-900 rounded-lg bg-black p-4 text-center flex justify-center">
           <div className="flex text-zinc-700 gap-x-2">
-            <Search
-              className={`${
-                searchClicked ? "opacity-0" : "opacity-100"
-              } transition-all duration-300 ease-linear`}
-            />
+            <Search className={`transition-all duration-300 ease-linear`} />
 
             <input
               className="text-md text-zinc-500 bg-transparent placeholder:text-zinc-700 w-full text-center outline-none"
               placeholder="Looking for something?"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              onFocus={() => setSearchClicked(true)}
             />
           </div>
         </div>
@@ -37,9 +32,13 @@ export default function ProductShowcase() {
         <CartSheet />
       </div>
 
-      <div className="mt-16">
+      <div className="pt-16">
+        <CatalogFilters />
+      </div>
+
+      <div className="mt-8">
         {query ? (
-          <div className="grid grid-cols-3 gap-x-8">
+          <div className="grid grid-cols-3 gap-x-8 items-center">
             {productsMock
               .filter((p) => p.name.toLowerCase().includes(query.toLowerCase()))
               .map((product) => (
@@ -47,7 +46,7 @@ export default function ProductShowcase() {
               ))}
           </div>
         ) : (
-          <div className="grid grid-cols-3 gap-x-8">
+          <div className="flex flex-col space-y-8 lg:grid lg:grid-cols-3 lg:space-y-0 gap-x-8">
             {productsMock.map((product) => (
               <ProductBox product={product} key={product.id} />
             ))}
