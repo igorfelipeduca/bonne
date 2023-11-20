@@ -7,30 +7,14 @@ import { productsMock } from "@/lib/products.mock";
 import { useState } from "react";
 import { Search } from "lucide-react";
 import CatalogFilters from "./CatalogFilters";
+import CatalogSearch from "./Search";
 
 export default function Catalog() {
   const [query, setQuery] = useState<string>("");
 
   return (
-    <div className={`bg-black p-16 w-full min-h-screen`}>
-      <div className="flex justify-center items-center gap-x-4 w-full">
-        <Image src={"/icon.svg"} alt="Icon" className="h-10 w-10" isBlurred />
-
-        <div className="w-2/3 border border-zinc-900 rounded-lg bg-black p-4 text-center flex justify-center">
-          <div className="flex text-zinc-700 gap-x-2">
-            <Search className={`transition-all duration-300 ease-linear`} />
-
-            <input
-              className="text-md text-zinc-500 bg-transparent placeholder:text-zinc-700 w-full text-center outline-none"
-              placeholder="Looking for something?"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-            />
-          </div>
-        </div>
-
-        <CartSheet />
-      </div>
+    <div className={`bg-black py-16 px-2 lg:p-16 w-full min-h-screen`}>
+      <CatalogSearch query={query} setQuery={setQuery} />
 
       <div className="pt-16">
         <CatalogFilters />
