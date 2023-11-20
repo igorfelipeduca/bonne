@@ -13,7 +13,7 @@ export default function Catalog() {
   const [query, setQuery] = useState<string>("");
 
   return (
-    <div className={`bg-black p-16 w-full min-h-screen`}>
+    <div className={`bg-black py-16 px-2 lg:p-16 w-full min-h-screen`}>
       <CatalogSearch query={query} setQuery={setQuery} />
 
       <div className="pt-16">
