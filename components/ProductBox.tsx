@@ -68,9 +68,17 @@ export default function ProductBox({ product }: { product: Product }) {
           <h3 className="text-md">Add to cart</h3>
         </div>
 
-        <div className="flex justify-between items-center">
+        <div className="flex justify-center">
           <h3 className="text-zinc-500 text-lg font-medium">{product.name}</h3>
+        </div>
 
+        <p className="text-zinc-700">
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Explicabo
+          quo aspernatur fugit consectetur excepturi maxime similique possimus
+          totam soluta laudantium exercitationem, ipsam id autem ea.
+        </p>
+
+        <div className="flex justify-center">
           <div className="flex gap-x-2 items-center">
             <div className="rounded-xl p-2 bg-blue-700 text-white font-medium transition-all duration-150 hover:bg-blue-800 cursor-pointer text-md">
               Buy for{" "}
@@ -81,12 +89,6 @@ export default function ProductBox({ product }: { product: Product }) {
             </div>
           </div>
         </div>
-
-        <p className="text-zinc-700">
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Explicabo
-          quo aspernatur fugit consectetur excepturi maxime similique possimus
-          totam soluta laudantium exercitationem, ipsam id autem ea.
-        </p>
       </div>
     </>
   );

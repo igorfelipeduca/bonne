@@ -10,7 +10,7 @@ interface CatalogSearchProps {
 export default function CatalogSearch({ query, setQuery }: CatalogSearchProps) {
   return (
     <>
-      <div className="hidden lg:flex justify-center items-center gap-x-4 w-full">
+      <div className="hidden lg:flex items-center gap-x-4 w-full">
         <Image src={"/icon.svg"} alt="Icon" className="h-10 w-10" isBlurred />
 
         <div className="w-full px-2 lg:px-0 lg:w-2/3 border border-zinc-900 rounded-lg bg-black p-4 text-center flex justify-center">
@@ -29,7 +29,7 @@ export default function CatalogSearch({ query, setQuery }: CatalogSearchProps) {
         <CartSheet />
       </div>
 
-      <div className="flex lg:hidden justify-center items-center gap-x-4 w-full">
+      <div className="flex lg:hidden px-2 items-center gap-x-4 w-full">
         <Image src={"/icon.svg"} alt="Icon" className="h-10 w-10" isBlurred />
 
         <div className="w-full px-2 lg:px-0 lg:w-2/3 border border-zinc-900 rounded-lg bg-black p-4 text-center flex justify-center">
