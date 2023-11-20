@@ -38,7 +38,7 @@ export default function CartSheet() {
           <SheetTitle className="font-medium">Your wanted items</SheetTitle>
         </SheetHeader>
 
-        {cartProducts.length ? (
+        {cartProducts?.length ? (
           <div className="mt-8 space-y-4">
             {cartProducts.map((product) => (
               <SheetProduct key={product.id} product={product} />
