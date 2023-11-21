@@ -15,8 +15,6 @@ export default function Catalog() {
     const products = fetchProducts().then((data) => data.json());
 
     products.then((data) => {
-      console.log({ data });
-
       setProducts(data);
       setLoading(false);
     });
