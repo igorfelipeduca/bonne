@@ -73,7 +73,9 @@ export default function ProductBox({ product }: { product: Product }) {
         </div>
 
         <div className="flex justify-center">
-          <h3 className="text-zinc-500 text-lg font-medium">{product.title}</h3>
+          <h3 className="text-zinc-500 text-lg font-medium max-w-sm truncate">
+            {product.title}
+          </h3>
         </div>
 
         <p className="text-zinc-700">
