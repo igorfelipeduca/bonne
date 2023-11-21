@@ -15,7 +15,9 @@ export default function SheetProduct({ product }: { product: CartProduct }) {
   const [productHidden, setProductHidden] = useState<boolean>(false);
 
   useEffect(() => {
-    setParsedProduct(searchProduct(product.id));
+    searchProduct(product.id).then((product) => {
+      setParsedProduct(product);
+    });
   }, [product]);
 
   const removeProduct = () => {
@@ -53,14 +55,14 @@ export default function SheetProduct({ product }: { product: CartProduct }) {
 
         <div className="flex flex-col space-y-2 w-full">
           <Image
-            alt={parsedProduct?.name}
+            alt={parsedProduct?.title}
             src={`/${parsedProduct?.image}`}
             className="aspect-video object-cover"
             isBlurred
           />
 
           <div className="w-full flex justify-between items-center">
-            <h3 className="text-zinc-700">{parsedProduct?.name}</h3>
+            <h3 className="text-zinc-700">{parsedProduct?.title}</h3>
 
             <h3 className="text-zinc-500">
               {parsedProduct?.price.toLocaleString("en-US", {
@@ -84,14 +86,14 @@ export default function SheetProduct({ product }: { product: CartProduct }) {
       >
         <div className="flex flex-col space-y-2 w-full">
           <Image
-            alt={parsedProduct?.name}
+            alt={parsedProduct?.title}
             src={`/${parsedProduct?.image}`}
             className="aspect-video object-cover"
             isBlurred
           />
 
           <div className="w-full flex justify-between items-center">
-            <h3 className="text-zinc-700">{parsedProduct?.name}</h3>
+            <h3 className="text-zinc-700">{parsedProduct?.title}</h3>
 
             <h3 className="text-zinc-500">
               {parsedProduct?.price.toLocaleString("en-US", {
