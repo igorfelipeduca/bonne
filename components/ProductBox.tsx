@@ -4,30 +4,38 @@ import { ShoppingBag } from "lucide-react";
 import { toast } from "sonner";
 
 export interface Product {
+  category: string;
+  description: string;
   id: number;
-  name: string;
   image: string;
   price: number;
+  rating: {
+    rate: number;
+    count: number;
+  };
+  title: string;
 }
 
 export default function ProductBox({ product }: { product: Product }) {
   const addToCart = () => {
     addProductToCard(product.id);
 
-    toast(`📦 ${product.name} added to cart!`);
+    toast(`📦 ${product.title} added to cart!`);
   };
 
   return (
     <>
-      <div className="hidden lg:flex lg:flex-col gap-y-4">
+      <div className="hidden lg:flex lg:flex-col gap-x-4">
         <Image
-          src={`/${product.image}`}
+          src={product.image}
           className="h-auto lg:h-96 w-auto aspect-video object-cover cursor-pointer transition-all "
           isBlurred
         />
 
-        <div className="flex justify-between items-center">
-          <h3 className="text-zinc-500 text-xl font-medium">{product.name}</h3>
+        <div className="flex justify-between items-center lg:mt-4">
+          <h3 className="text-zinc-500 text-xl font-medium max-w-sm truncate">
+            {product.title}
+          </h3>
 
           <div className="flex gap-x-2 items-center">
             <ShoppingBag
@@ -45,16 +53,12 @@ export default function ProductBox({ product }: { product: Product }) {
           </div>
         </div>
 
-        <p className="text-zinc-700">
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Explicabo
-          quo aspernatur fugit consectetur excepturi maxime similique possimus
-          totam soluta laudantium exercitationem, ipsam id autem ea.
-        </p>
+        <p className="text-zinc-700 mt-3">{product.description}</p>
       </div>
 
       <div className="flex flex-col lg:hidden gap-y-4">
         <Image
-          src={`/${product.image}`}
+          src={product.image}
           className="h-auto lg:h-96 w-auto aspect-video object-cover cursor-pointer transition-all "
           isBlurred
         />
@@ -69,7 +73,7 @@ export default function ProductBox({ product }: { product: Product }) {
         </div>
 
         <div className="flex justify-center">
-          <h3 className="text-zinc-500 text-lg font-medium">{product.name}</h3>
+          <h3 className="text-zinc-500 text-lg font-medium">{product.title}</h3>
         </div>
 
         <p className="text-zinc-700">

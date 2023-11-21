@@ -1,16 +1,26 @@
 "use client";
 
-import { Image } from "@nextui-org/react";
-import CartSheet from "./CartSheet";
 import ProductBox, { Product } from "./ProductBox";
-import { productsMock } from "@/lib/products.mock";
-import { useState } from "react";
-import { Search } from "lucide-react";
+import { useEffect, useState } from "react";
 import CatalogFilters from "./CatalogFilters";
 import CatalogSearch from "./Search";
+import { fetchProducts } from "@/app/api/fetchProducts";
 
 export default function Catalog() {
   const [query, setQuery] = useState<string>("");
+  const [products, setProducts] = useState<any[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    const products = fetchProducts().then((data) => data.json());
+
+    products.then((data) => {
+      console.log({ data });
+
+      setProducts(data);
+      setLoading(false);
+    });
+  }, []);
 
   return (
     <div className={`bg-black py-16 px-2 lg:p-16 w-full min-h-screen`}>
@@ -20,23 +30,35 @@ export default function Catalog() {
         <CatalogFilters />
       </div>
 
-      <div className="mt-8">
-        {query ? (
-          <div className="grid grid-cols-3 gap-x-8 items-center">
-            {productsMock
-              .filter((p) => p.name.toLowerCase().includes(query.toLowerCase()))
-              .map((product) => (
+      {loading ? (
+        <div className="flex flex-col space-y-8 lg:grid lg:grid-cols-3 lg:gap-8 lg:space-y-0 gap-x-8 lg:items-start mt-8">
+          {Array(12)
+            .fill(Math.random())
+            .map((_) => (
+              <div className="w-full h-72 rounded-xl bg-zinc-800 animate-pulse" />
+            ))}
+        </div>
+      ) : (
+        <div className="mt-8">
+          {query ? (
+            <div className="flex flex-col space-y-8 lg:grid lg:grid-cols-3 lg:gap-8 items-center">
+              {products
+                .filter((p: Product) =>
+                  p.title.toLowerCase().includes(query.toLowerCase())
+                )
+                .map((product: Product) => (
+                  <ProductBox product={product} key={product.id} />
+                ))}
+            </div>
+          ) : (
+            <div className="flex flex-col space-y-8 lg:grid lg:grid-cols-3 lg:gap-8 lg:space-y-0 gap-x-8 lg:items-start">
+              {products.map((product: Product) => (
                 <ProductBox product={product} key={product.id} />
               ))}
-          </div>
-        ) : (
-          <div className="flex flex-col space-y-8 lg:grid lg:grid-cols-3 lg:space-y-0 gap-x-8">
-            {productsMock.map((product) => (
-              <ProductBox product={product} key={product.id} />
-            ))}
-          </div>
-        )}
-      </div>
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }
