@@ -1,17 +1,10 @@
+import { fetchProducts } from "@/app/api/fetchProducts";
 import { Product } from "@/components/ProductBox";
-import { productsMock } from "./products.mock";
 
-export const searchProduct = (id: number): Product | undefined => {
-  const existentProducts = localStorage.getItem("products");
+export const searchProduct = async (id: number) => {
+  const products = await fetchProducts().then((data) => data.json());
 
-  if (existentProducts) {
-    const products = JSON.parse(existentProducts);
-    const product = products.find((product: any) => product.id === id);
+  const product = products.find((product: Product) => product.id === id);
 
-    const mockedProduct = productsMock.find((product) => product.id === id);
-
-    return mockedProduct;
-  }
-
-  return;
+  return product as Product;
 };

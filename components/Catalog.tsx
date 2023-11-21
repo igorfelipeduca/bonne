@@ -33,7 +33,10 @@ export default function Catalog() {
           {Array(12)
             .fill(Math.random())
             .map((_) => (
-              <div className="w-full h-72 rounded-xl bg-zinc-800 animate-pulse" />
+              <div
+                className="w-full h-72 rounded-xl bg-zinc-800 animate-pulse"
+                key={_}
+              />
             ))}
         </div>
       ) : (
