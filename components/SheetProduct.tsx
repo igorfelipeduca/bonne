@@ -52,7 +52,7 @@ export default function SheetProduct({ product }: { product: CartProduct }) {
           <h3 className="text-zinc-400">{parsedProduct?.title}</h3>
 
           <div className="w-full flex justify-between items-center text-md">
-            <div className="flex gap-x-2 items-center text-red-500">
+            <div className="flex gap-x-2 items-center text-red-500 cursor-pointer">
               <Trash2Icon onClick={removeProduct} className="h-5 w-5" />
               Remove
             </div>
