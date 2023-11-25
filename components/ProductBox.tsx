@@ -1,6 +1,7 @@
 import { addProductToCard } from "@/lib/addProductToCart";
 import { Image } from "@nextui-org/react";
 import { ShoppingBag } from "lucide-react";
+import Link from "next/link";
 import { toast } from "sonner";
 
 export interface Product {
@@ -43,13 +44,16 @@ export default function ProductBox({ product }: { product: Product }) {
               className="text-zinc-500 h-6 w-6 stroke-1 transtion-all duration-150 ease-linear hover:text-blue-500 cursor-pointer"
             />
 
-            <div className="rounded-xl p-2 bg-blue-700 text-white font-medium transition-all duration-150 hover:bg-blue-800 cursor-pointer">
+            <Link
+              href={`/product/${product.id}`}
+              className="rounded-xl p-2 bg-blue-700 text-white font-medium transition-all duration-150 hover:bg-blue-800 cursor-pointer"
+            >
               Buy for{" "}
               {product.price.toLocaleString("en-US", {
                 style: "currency",
                 currency: "USD",
               })}
-            </div>
+            </Link>
           </div>
         </div>
 
@@ -85,13 +89,16 @@ export default function ProductBox({ product }: { product: Product }) {
         </p>
 
         <div className="flex gap-x-2 items-center">
-          <div className="rounded-lg text-center w-full p-2 bg-blue-700 text-white font-medium transition-all duration-150 hover:bg-blue-800 cursor-pointer text-md">
+          <Link
+            href={`/product/${product.id}`}
+            className="rounded-lg text-center w-full p-2 bg-blue-700 text-white font-medium transition-all duration-150 hover:bg-blue-800 cursor-pointer text-md"
+          >
             Buy for{" "}
             {product.price.toLocaleString("en-US", {
               style: "currency",
               currency: "USD",
             })}
-          </div>
+          </Link>
         </div>
       </div>
     </>
