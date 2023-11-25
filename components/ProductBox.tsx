@@ -26,15 +26,14 @@ export default function ProductBox({ product }: { product: Product }) {
 
   return (
     <>
-      <Link
-        href={`/product/${product.id}`}
-        className="hidden lg:flex lg:flex-col gap-x-4"
-      >
-        <Image
-          src={product.image}
-          className="h-auto lg:h-96 w-auto aspect-video object-cover cursor-pointer transition-all "
-          isBlurred
-        />
+      <div className="hidden lg:flex lg:flex-col gap-x-4">
+        <Link href={`/product/${product.id}`}>
+          <Image
+            src={product.image}
+            className="h-auto lg:h-96 w-auto aspect-video object-cover cursor-pointer transition-all "
+            isBlurred
+          />
+        </Link>
 
         <div className="flex justify-between items-center lg:mt-4">
           <h3 className="text-zinc-500 text-lg font-medium max-w-sm truncate">
@@ -50,17 +49,16 @@ export default function ProductBox({ product }: { product: Product }) {
         </div>
 
         <p className="text-zinc-700 mt-3">{product.description}</p>
-      </Link>
+      </div>
 
-      <Link
-        href={`/product/${product.id}`}
-        className="flex flex-col lg:hidden gap-y-4"
-      >
-        <Image
-          src={product.image}
-          className="h-auto lg:h-96 w-auto aspect-video object-cover cursor-pointer transition-all "
-          isBlurred
-        />
+      <div className="flex flex-col lg:hidden gap-y-4">
+        <Link href={`/product/${product.id}`}>
+          <Image
+            src={product.image}
+            className="h-auto lg:h-96 w-auto aspect-video object-cover cursor-pointer transition-all "
+            isBlurred
+          />
+        </Link>
 
         <div className="flex gap-x-2 items-center" onClick={addToCart}>
           <ShoppingBag
@@ -80,7 +78,7 @@ export default function ProductBox({ product }: { product: Product }) {
           quo aspernatur fugit consectetur excepturi maxime similique possimus
           totam soluta laudantium exercitationem, ipsam id autem ea.
         </p>
-      </Link>
+      </div>
     </>
   );
 }
