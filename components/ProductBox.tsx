@@ -71,11 +71,9 @@ export default function ProductBox({ product }: { product: Product }) {
           <h3 className="text-md">Add to cart</h3>
         </div>
 
-        <div className="flex justify-center">
-          <h3 className="text-zinc-500 text-lg font-medium max-w-sm truncate">
-            {product.title}
-          </h3>
-        </div>
+        <h3 className="text-zinc-500 text-lg font-medium max-w-sm truncate">
+          {product.title}
+        </h3>
 
         <p className="text-zinc-700">
           Lorem ipsum dolor, sit amet consectetur adipisicing elit. Explicabo

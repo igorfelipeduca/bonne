@@ -4,11 +4,12 @@ import {
   Sheet,
   SheetContent,
   SheetDescription,
+  SheetFooter,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { ShoppingBag } from "lucide-react";
+import { ShoppingBag, Wallet } from "lucide-react";
 import SheetProduct from "./SheetProduct";
 import { Badge } from "@nextui-org/react";
 import { CartProduct } from "@/lib/addProductToCart";
@@ -38,19 +39,29 @@ export default function CartSheet() {
           <SheetTitle className="font-medium">Your wanted items</SheetTitle>
         </SheetHeader>
 
-        {cartProducts?.length ? (
-          <div className="mt-8 space-y-4">
-            {cartProducts.map((product) => (
-              <SheetProduct key={product.id} product={product} />
-            ))}
-          </div>
-        ) : (
-          <div className="h-full flex justify-center items-center">
-            <h3 className="text-zinc-700">
-              What about choosing some products?
-            </h3>
-          </div>
-        )}
+        <div className="flex flex-col justify-between h-full pb-8">
+          {cartProducts?.length ? (
+            <div className="mt-8 space-y-4">
+              {cartProducts.map((product) => (
+                <SheetProduct key={product.id} product={product} />
+              ))}
+            </div>
+          ) : (
+            <div className="h-full flex justify-center items-center">
+              <h3 className="text-zinc-700">
+                What about choosing some products?
+              </h3>
+            </div>
+          )}
+
+          <SheetFooter>
+            <div className="w-full flex justify-center">
+              <div className="py-2 px-4 rounded-lg bg-blue-700 text-white transition-all duration-150 ease-linear hover:bg-blue-800 flex gap-x-2 items-center">
+                <Wallet className="h-4 w-4" /> Checkout
+              </div>
+            </div>
+          </SheetFooter>
+        </div>
       </SheetContent>
     </Sheet>
   );

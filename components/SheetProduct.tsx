@@ -2,7 +2,7 @@
 
 import { Image } from "@nextui-org/react";
 import { Product } from "./ProductBox";
-import { Trash2 } from "lucide-react";
+import { Trash2, Trash2Icon, XIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import { removeProductFromCart } from "@/lib/removeProductFromCart";
 import { CartProduct } from "@/lib/addProductToCart";
@@ -41,28 +41,21 @@ export default function SheetProduct({ product }: { product: CartProduct }) {
         onMouseLeave={() => setRemoveVisible(!removeVisible)}
         hidden={productHidden}
       >
-        <div
-          className="bg-red-500/40 w-[21rem] h-48 absolute z-50 rounded-xl mix-blend-screen transition-all duration-150 ease-linear"
-          hidden={!removeVisible}
-        >
-          <div className={`h-full flex justify-center items-center`}>
-            <Trash2
-              className="h-10 w-10 text-white cursor-pointer"
-              onClick={removeProduct}
-            />
-          </div>
-        </div>
-
         <div className="flex flex-col space-y-2 w-full">
           <Image
             alt={parsedProduct?.title}
-            src={`/${parsedProduct?.image}`}
+            src={parsedProduct?.image}
             className="aspect-video object-cover"
             isBlurred
           />
 
-          <div className="w-full flex justify-between items-center">
-            <h3 className="text-zinc-700">{parsedProduct?.title}</h3>
+          <h3 className="text-zinc-400">{parsedProduct?.title}</h3>
+
+          <div className="w-full flex justify-between items-center text-md">
+            <div className="flex gap-x-2 items-center text-red-500">
+              <Trash2Icon onClick={removeProduct} className="h-5 w-5" />
+              Remove
+            </div>
 
             <h3 className="text-zinc-500">
               {parsedProduct?.price.toLocaleString("en-US", {
@@ -84,17 +77,19 @@ export default function SheetProduct({ product }: { product: CartProduct }) {
         onMouseLeave={() => setRemoveVisible(!removeVisible)}
         hidden={productHidden}
       >
-        <div className="flex flex-col space-y-2 w-full">
+        <div className="flex flex-col space-y-4 w-full">
           <Image
             alt={parsedProduct?.title}
-            src={`/${parsedProduct?.image}`}
+            src={parsedProduct?.image}
             className="aspect-video object-cover"
             isBlurred
           />
 
-          <div className="w-full flex justify-between items-center">
-            <h3 className="text-zinc-700">{parsedProduct?.title}</h3>
+          <div className="w-full mt-2">
+            <h3 className="text-zinc-400">{parsedProduct?.title}</h3>
+          </div>
 
+          <div className="w-full flex justify-between items-center mt-2">
             <h3 className="text-zinc-500">
               {parsedProduct?.price.toLocaleString("en-US", {
                 style: "currency",

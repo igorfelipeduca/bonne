@@ -21,12 +21,12 @@ export default function Catalog() {
   }, []);
 
   return (
-    <div className={`bg-black py-16 px-2 lg:p-16 w-full min-h-screen`}>
+    <div className={`bg-black lg:py-16 py-8 px-6 lg:p-16 w-full min-h-screen`}>
       <CatalogSearch query={query} setQuery={setQuery} />
 
-      <div className="pt-16">
+      {/* <div className="pt-16">
         <CatalogFilters />
-      </div>
+      </div> */}
 
       {loading ? (
         <div className="flex flex-col space-y-8 lg:grid lg:grid-cols-3 lg:gap-8 lg:space-y-0 gap-x-8 lg:items-start mt-8">
