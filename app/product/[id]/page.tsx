@@ -1,11 +1,14 @@
 "use client";
 
 import { Product } from "@/components/ProductBox";
-import ProductSizeBox from "@/components/ProductSizeBox";
+import ProductSpecBox from "@/components/ProductSpecBox";
 import CatalogSearch from "@/components/Search";
+import { addProductToCard } from "@/lib/addProductToCart";
 import { searchProduct } from "@/lib/searchProduct";
 import { Image } from "@nextui-org/react";
+import { ShoppingBag } from "lucide-react";
 import { useEffect, useState } from "react";
+import { Toaster, toast } from "sonner";
 
 interface ProductPageProps {
   params: {
@@ -20,11 +23,11 @@ export interface Specification {
 
 const mockSpecifications: Specification[] = [
   {
-    label: "Blue",
+    label: "144hz",
     isAvailable: true,
   },
   {
-    label: "Red",
+    label: "244hz",
     isAvailable: false,
   },
 ];
@@ -44,8 +47,16 @@ export default function ProductPage({ params }: ProductPageProps) {
     });
   }, []);
 
+  const addToCart = () => {
+    addProductToCard(product?.id ?? 0);
+
+    toast(`📦 ${product?.title} added to cart!`);
+  };
+
   return (
     <>
+      <Toaster />
+
       <div className="hidden lg:flex">
         <div className="min-h-screen w-screen bg-black py-8">
           <CatalogSearch query={query} setQuery={setQuery} />
@@ -59,7 +70,9 @@ export default function ProductPage({ params }: ProductPageProps) {
             <div className="h-full flex">
               <div className="flex flex-col justify-between">
                 <div className="flex flex-col">
-                  <h1 className="text-white text-xl">{product?.title}</h1>
+                  <h1 className="text-white text-xl max-w-lg">
+                    {product?.title}
+                  </h1>
 
                   <div className="mt-4">
                     <h3 className="text-zinc-600 max-w-lg">
@@ -69,7 +82,7 @@ export default function ProductPage({ params }: ProductPageProps) {
 
                   <div className="grid grid-cols-6 gap-x-4 mt-4">
                     {specifications.map((specification, index) => (
-                      <ProductSizeBox
+                      <ProductSpecBox
                         type={
                           selectedSpecification === specification.label
                             ? "selected"
@@ -103,7 +116,16 @@ export default function ProductPage({ params }: ProductPageProps) {
                   <h4 className="text-zinc-400">📍 Deliver to Brazil 🇧🇷</h4>
                 </div>
 
-                <div className="mt-10">
+                <div className="mt-10 flex gap-x-4 items-center">
+                  <div className="p-px rounded-lg bg-gradient-to-b from-zinc-800 to-zinc-900">
+                    <div
+                      className="py-2 px-8 rounded-lg bg-black flex gap-x-2 items-center transition-all duration-150 ease-linear hover:bg-zinc-900 cursor-pointer"
+                      onClick={addToCart}
+                    >
+                      <ShoppingBag className="h-4 w-4" /> Add to cart
+                    </div>
+                  </div>
+
                   <div className="w-48 py-2 px-4 rounded-lg bg-blue-700 text-white transition-all duration-150 ease-linear hover:bg-blue-800 text-center cursor-pointer">
                     Buy for{" "}
                     {(product?.price ?? 0).toLocaleString("en-US", {
@@ -128,7 +150,9 @@ export default function ProductPage({ params }: ProductPageProps) {
             <div className="h-full flex mt-10">
               <div className="flex flex-col justify-between">
                 <div className="flex flex-col">
-                  <h1 className="text-white text-xl">{product?.title}</h1>
+                  <h1 className="text-white text-xl max-w-lg">
+                    {product?.title}
+                  </h1>
 
                   <div className="mt-4">
                     <h3 className="text-zinc-600 max-w-lg">
@@ -138,7 +162,7 @@ export default function ProductPage({ params }: ProductPageProps) {
 
                   <div className="grid grid-cols-4 gap-x-4 mt-4">
                     {specifications.map((specification, index) => (
-                      <ProductSizeBox
+                      <ProductSpecBox
                         type={
                           selectedSpecification === specification.label
                             ? "selected"
@@ -172,7 +196,16 @@ export default function ProductPage({ params }: ProductPageProps) {
                   <h4 className="text-zinc-400">📍 Deliver to Brazil 🇧🇷</h4>
                 </div>
 
-                <div className="mt-10">
+                <div className="mt-10 flex flex-col items-center">
+                  <div className="p-px rounded-lg bg-gradient-to-b from-zinc-800 to-zinc-900 mb-4 w-full">
+                    <div
+                      className="py-2 w-full rounded-lg bg-black gap-x-2 items-center transition-all duration-150 ease-linear hover:bg-zinc-900 cursor-pointer flex justify-center"
+                      onClick={addToCart}
+                    >
+                      <ShoppingBag className="h-4 w-4" /> Add to cart
+                    </div>
+                  </div>
+
                   <div className="w-full py-2 px-4 rounded-lg bg-blue-700 text-white transition-all duration-150 ease-linear hover:bg-blue-800 text-center cursor-pointer">
                     Buy for{" "}
                     {(product?.price ?? 0).toLocaleString("en-US", {

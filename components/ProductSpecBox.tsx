@@ -5,7 +5,7 @@ interface ProductSizeBoxProps {
   onClick?: () => void;
 }
 
-export default function ProductSizeBox({
+export default function ProductSpecBox({
   type,
   label,
   onClick,
@@ -15,15 +15,14 @@ export default function ProductSizeBox({
       return (
         <div
           className={
-            "p-px aspect-square h-16 w-16 rounded-lg bg-gradient-to-b from-zinc-700 to-zinc-900 transition-all duration-150 ease-linear cursor-not-allowed"
+            "p-px rounded-lg bg-gradient-to-b from-zinc-700 to-zinc-900 transition-all duration-150 ease-linear cursor-not-allowed"
           }
           onClick={onClick}
         >
-          <div className="rounded-lg p-2 h-[3.9rem] w-[3.9rem] transition-all duration-150 ease-linear flex items-center justify-center absolute bg-black">
+          <div className="relative h-full w-full bg-black rounded-lg p-2 transition-all duration-150 ease-linear flex items-center justify-center">
             <h2 className="text-zinc-700 text-lg font-medium">{label}</h2>
+            <div className="absolute w-px h-full rotate-45 bg-zinc-700" />
           </div>
-
-          <div className="relative h-[5.3rem] w-px bg-zinc-700 rotate-45 left-8 bottom-3" />
         </div>
       );
 
@@ -38,11 +37,11 @@ export default function ProductSizeBox({
       return (
         <div
           className={
-            "p-px aspect-square h-16 w-16 rounded-lg bg-gradient-to-b from-zinc-700 to-zinc-900 transition-all duration-150 ease-linear cursor-pointer"
+            "p-px aspect-square rounded-lg bg-gradient-to-b from-zinc-700 to-zinc-900 transition-all duration-150 ease-linear cursor-pointer"
           }
           onClick={onClick}
         >
-          <div className="rounded-lg p-2 h-full bg-black transition-all duration-150 ease-linear hover:bg-zinc-900 flex items-center justify-center">
+          <div className="rounded-lg p-2 h-full w-full bg-black transition-all duration-150 ease-linear hover:bg-zinc-900 flex items-center justify-center">
             <h2 className="text-zinc-500 text-lg font-medium">{label}</h2>
           </div>
         </div>

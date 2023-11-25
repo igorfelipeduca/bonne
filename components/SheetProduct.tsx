@@ -10,24 +10,29 @@ import { searchProduct } from "@/lib/searchProduct";
 
 export default function SheetProduct({ product }: { product: CartProduct }) {
   const [parsedProduct, setParsedProduct] = useState<Product>();
-  const [removeVisible, setRemoveVisible] = useState<boolean>(false);
   const [removeClicked, setRemoveClicked] = useState<boolean>(false);
   const [productHidden, setProductHidden] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     searchProduct(product.id).then((product) => {
       setParsedProduct(product);
+
+      setLoading(false);
     });
   }, [product]);
 
   const removeProduct = () => {
     setRemoveClicked(true);
+    setProductHidden(true);
     removeProductFromCart(product.id);
-
-    setTimeout(() => {
-      setProductHidden(true);
-    }, 350);
   };
+
+  if (loading) {
+    return (
+      <div className="h-40 w-full rounded-lg bg-zinc-900 border border-zinc-800 animate-pulse" />
+    );
+  }
 
   return (
     <>
@@ -36,9 +41,7 @@ export default function SheetProduct({ product }: { product: CartProduct }) {
           removeClicked
             ? "animate-out slide-out-to-bottom fade-out duration-400"
             : ""
-        }`}
-        onMouseEnter={() => setRemoveVisible(!removeVisible)}
-        onMouseLeave={() => setRemoveVisible(!removeVisible)}
+        } ${productHidden ? "hidden" : ""}`}
         hidden={productHidden}
       >
         <div className="flex flex-col space-y-2 w-full">
@@ -52,7 +55,10 @@ export default function SheetProduct({ product }: { product: CartProduct }) {
           <h3 className="text-zinc-400">{parsedProduct?.title}</h3>
 
           <div className="w-full flex justify-between items-center text-md">
-            <div className="flex gap-x-2 items-center text-red-500 cursor-pointer">
+            <div
+              className="flex gap-x-2 items-center text-red-500 cursor-pointer"
+              onClick={removeProduct}
+            >
               <Trash2Icon onClick={removeProduct} className="h-5 w-5" />
               Remove
             </div>
@@ -73,8 +79,6 @@ export default function SheetProduct({ product }: { product: CartProduct }) {
             ? "animate-out slide-out-to-bottom fade-out duration-400"
             : ""
         }`}
-        onMouseEnter={() => setRemoveVisible(!removeVisible)}
-        onMouseLeave={() => setRemoveVisible(!removeVisible)}
         hidden={productHidden}
       >
         <div className="flex flex-col space-y-4 w-full">
