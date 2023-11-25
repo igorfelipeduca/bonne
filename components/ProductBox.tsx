@@ -26,7 +26,10 @@ export default function ProductBox({ product }: { product: Product }) {
 
   return (
     <>
-      <div className="hidden lg:flex lg:flex-col gap-x-4">
+      <Link
+        href={`/product/${product.id}`}
+        className="hidden lg:flex lg:flex-col gap-x-4"
+      >
         <Image
           src={product.image}
           className="h-auto lg:h-96 w-auto aspect-video object-cover cursor-pointer transition-all "
@@ -34,7 +37,7 @@ export default function ProductBox({ product }: { product: Product }) {
         />
 
         <div className="flex justify-between items-center lg:mt-4">
-          <h3 className="text-zinc-500 text-xl font-medium max-w-sm truncate">
+          <h3 className="text-zinc-500 text-lg font-medium max-w-sm truncate">
             {product.title}
           </h3>
 
@@ -43,24 +46,16 @@ export default function ProductBox({ product }: { product: Product }) {
               onClick={addToCart}
               className="text-zinc-500 h-6 w-6 stroke-1 transtion-all duration-150 ease-linear hover:text-blue-500 cursor-pointer"
             />
-
-            <Link
-              href={`/product/${product.id}`}
-              className="rounded-xl p-2 bg-blue-700 text-white font-medium transition-all duration-150 hover:bg-blue-800 cursor-pointer"
-            >
-              Buy for{" "}
-              {product.price.toLocaleString("en-US", {
-                style: "currency",
-                currency: "USD",
-              })}
-            </Link>
           </div>
         </div>
 
         <p className="text-zinc-700 mt-3">{product.description}</p>
-      </div>
+      </Link>
 
-      <div className="flex flex-col lg:hidden gap-y-4">
+      <Link
+        href={`/product/${product.id}`}
+        className="flex flex-col lg:hidden gap-y-4"
+      >
         <Image
           src={product.image}
           className="h-auto lg:h-96 w-auto aspect-video object-cover cursor-pointer transition-all "
@@ -87,20 +82,7 @@ export default function ProductBox({ product }: { product: Product }) {
           quo aspernatur fugit consectetur excepturi maxime similique possimus
           totam soluta laudantium exercitationem, ipsam id autem ea.
         </p>
-
-        <div className="flex gap-x-2 items-center">
-          <Link
-            href={`/product/${product.id}`}
-            className="rounded-lg text-center w-full p-2 bg-blue-700 text-white font-medium transition-all duration-150 hover:bg-blue-800 cursor-pointer text-md"
-          >
-            Buy for{" "}
-            {product.price.toLocaleString("en-US", {
-              style: "currency",
-              currency: "USD",
-            })}
-          </Link>
-        </div>
-      </div>
+      </Link>
     </>
   );
 }
